@@ -29,10 +29,10 @@ var init = function (window) {
 
     // TODO 3 / 7 : Call the drawCircle() function
     var loopsCompleted = 0;
-while (loopsCompleted < 10) {
-  drawCircle() 
-  loopsCompleted++;
-}
+    while (loopsCompleted < 100) {
+      drawCircle();
+      loopsCompleted++;
+    }
 
     ////////////////////////////////////////////////////////////
     ///////////////// PROGRAM LOGIC ////////////////////////////
@@ -44,41 +44,38 @@ while (loopsCompleted < 10) {
         and check to see if it has drifted off the screen.         
         */
     function update() {
-      physikz.updatePosition(circles[0]);
-      physikz.updatePosition(circles[1]);
-      physikz.updatePosition(circles[2]);
-      physikz.updatePosition(circles[3]);
-      physikz.updatePosition(circles[4]);
-
+    
+      for (var i = 0; i < circles.length; i++) {
+        physikz.updatePosition(circles[i]);
+        game.checkCirclePosition(circles[i]);
+      }
+    }
       // TODO 4 : Update the circle's position //
-      // TODO 5 / 10 : Call game.checkCirclePosition() on your
-      game.checkCirclePosition(circles[0]);
-      game.checkCirclePosition(circles[1]);
-      game.checkCirclePosition(circles[2]);
-      game.checkCirclePosition(circles[3]);
-      game.checkCirclePosition(circles[4]);
-      game.checkCirclePosition = function (circle) {
-       
-        if (circle.x > canvas.width) {
-          circle.x = 0;
-        }
+      
+    // TODO 5 / 10 : Call game.checkCirclePosition() on your 
+    game.checkCirclePosition = function (circle) {
+      if (circle.x > canvas.width) {
+        circle.x = 0;
+      }
+      if (circle.y > canvas.height) {
+        circle.y = 0;
+      }
+      if (circle.x < 0) {
+        circle.x = canvas.width;
+      }
+      if (circle.y < 0) {
+        circle.y = canvas.height;
+      }
 
-        // TODO 7 : YOUR CODE STARTS HERE //////////////////////
-        if (circle.x < 0) {
-          circle.x = 0;
-          if (circle.y > canvas.height) circle.y = 0;
-          if (circle.y < 0) {
-            circle.y = 0;
-          }
-        }
 
-        // YOUR TODO 7 CODE ENDS HERE //////////////////////////
+      // TODO 7 : YOUR CODE STARTS HERE //////////////////////
 
-        // TODO 9 : Iterate over the array
-      };
+      // YOUR TODO 7 CODE ENDS HERE //////////////////////////
+
+      // TODO 9 : Iterate over the array
 
       // YOUR TODO 6 CODE ENDS HERE //////////////////////////
-    }
+    };
 
     /////////////////////////////////////////////////////////////
     // --- NO CODE BELOW HERE  --- DO NOT REMOVE THIS CODE --- //
